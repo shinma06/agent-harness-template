@@ -19,7 +19,7 @@ Rulesetの利用範囲はrepositoryの公開範囲と契約に依存します。
 
 ```bash
 gh api repos/OWNER/REPOSITORY/rulesets
-gh api repos/OWNER/REPOSITORY/branches/main/rules
+gh api repos/OWNER/REPOSITORY/rules/branches/main
 gh pr checks PR_NUMBER
 ```
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Install repository hooks explicitly; preserve unrelated custom hooks."""
 from pathlib import Path
+import os
 import subprocess
 
 
@@ -20,6 +21,13 @@ def bootstrap():
         result = subprocess.run(['git', 'config', *scope, '--get', 'core.hooksPath'],
                                 capture_output=True, text=True)
         if result.returncode == 1:
+            if not scope:
+                default_hooks = Path(subprocess.check_output(
+                    ['git', 'rev-parse', '--path-format=absolute', '--git-path', 'hooks'], text=True).strip())
+                if default_hooks.exists() and any(
+                        p.is_file() and not p.name.endswith('.sample') and os.access(p, os.X_OK)
+                        for p in default_hooks.iterdir()):
+                    raise ValueError('Active default Git hooks found; integrate manually without disabling them.')
             continue
         if result.returncode != 0:
             raise ValueError('Cannot inspect existing hooks.')

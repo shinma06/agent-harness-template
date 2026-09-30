@@ -25,7 +25,7 @@ SHAとtokenは実値へ置き換えます。返却にはtoken・host等が含ま
 
 - `register(storage, public, source, host)` はopaque IDとversionをpublicに追加し、digestとsource/hostをprivate側へ保存。
 - `resolve(storage, public, host)` はID、所有者、0600、host、digestを照合し、不一致なら拒否。
-- storageはgit common-dir配下など、同じrepositoryの本人専用の保管先。公開ファイルへ置かない。
+- storageはgit common-dir配下など、同じrepositoryの本人専用の保管先。storage/registry directoryは本人所有の0700を要求し、symlinkや権限不整合を変更せず拒否する。公開ファイルへ置かない。
 - publicにはowner/Issue/PR/HEAD/base/target/scope/停止宣言などを含め、パスや秘密情報は入れない。
 - `source`は実在するowned worktreeの絶対パスを呼出側で確認する。registryだけではwriter停止・Git clean・remote SHAは保証しない。
 

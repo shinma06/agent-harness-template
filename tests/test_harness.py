@@ -57,6 +57,34 @@ class HarnessTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 handoff_registry.resolve(tmp, public, 'test-host')
 
+    def test_registry_rejects_symlink_and_unsafe_directory_without_mutation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            outside = root / 'outside'
+            outside.mkdir(mode=0o755)
+            outside.chmod(0o755)
+            storage = root / 'storage'
+            storage.mkdir(mode=0o700)
+            registry = storage / 'registry'
+            registry.symlink_to(outside, target_is_directory=True)
+            with self.assertRaises((OSError, ValueError)):
+                handoff_registry.register(storage, {'owner': 'test'}, '/example/work', 'host')
+            with self.assertRaises(ValueError):
+                handoff_registry.resolve(storage, {'version': 2, 'registry_id': 'a' * 32}, 'host')
+            self.assertEqual(outside.stat().st_mode & 0o777, 0o755)
+            self.assertEqual(list(outside.iterdir()), [])
+            registry.unlink()
+            registry.mkdir(mode=0o755)
+            registry.chmod(0o755)
+            with self.assertRaises(ValueError):
+                handoff_registry.register(storage, {'owner': 'test'}, '/example/work', 'host')
+            self.assertEqual(registry.stat().st_mode & 0o777, 0o755)
+            self.assertEqual(list(registry.iterdir()), [])
+            alias = root / 'alias'
+            alias.symlink_to(storage, target_is_directory=True)
+            with self.assertRaises((OSError, ValueError)):
+                handoff_registry.register(alias, {'owner': 'test'}, '/example/work', 'host')
+
     def test_validator_does_not_echo_secrets_and_detects_bad_links(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -84,6 +112,16 @@ class HarnessTest(unittest.TestCase):
             self.assertNotEqual(attempt.returncode, 0)
             self.assertEqual(subprocess.check_output(['git', 'config', 'core.hooksPath'], cwd=tmp, env=env).strip(), b'custom-hooks')
             subprocess.run(['git', 'config', '--unset', 'core.hooksPath'], cwd=tmp, env=env, check=True)
+            old_hook = root / '.git/hooks/pre-commit'
+            old_hook.write_text('#!/bin/sh\nexit 42\n')
+            old_hook.chmod(0o755)
+            attempt = subprocess.run([sys.executable, str(script)], cwd=tmp, env=env, capture_output=True)
+            self.assertNotEqual(attempt.returncode, 0)
+            self.assertEqual(subprocess.run(['git', 'hook', 'run', 'pre-commit'], cwd=tmp, env=env,
+                                            capture_output=True).returncode, 42)
+            self.assertEqual(subprocess.run(['git', 'config', '--get', 'core.hooksPath'], cwd=tmp, env=env,
+                                            capture_output=True).returncode, 1)
+            old_hook.unlink()
             subprocess.run([sys.executable, str(script)], cwd=tmp, env=env, check=True, capture_output=True)
             subprocess.run([sys.executable, str(script)], cwd=tmp, env=env, check=True, capture_output=True)
 
