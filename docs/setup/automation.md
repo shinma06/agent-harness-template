@@ -12,7 +12,7 @@
 2. ユーザーが許可した独立top-levelセッションをcoordinatorに指定し、依頼文の対象を埋めます。子agent禁止環境ではCLI workerをspawnして迂回しません。
 3. read-onlyの1回目で対象、check、claim、状態、次の操作だけを照合します。権限のあるGitHub tool/CLIと実際のreview経路があるか確認します。
 4. 明示的に登録された対象だけで、review→必要なら修正→再review→checks→merge判定を1回通します。レビュー役はソース/GitHub/GUIを変更しません。
-5. API障害、認証切れ、writer再開、dirty、SHA不一致、review経路なしは停止条件。既存状態をreset/stashで捨てません。
+5. API障害、認証切れ、writer再開、dirty、SHA不一致、review経路なしは該当操作の停止条件。[未完了の停止判断](../workflow.md#中断終了cleanup)で原因と再開条件を確認し、独立した許可済み作業まで自動停止しません。既存状態をreset/stashで捨てません。
 
 これは元の専用scriptの `enroll/tick/resume` コマンドを再現するCLIではありません。元scriptを流用する場合は、repository/owner、Issue/PR schema、check名、branch戦略、CaseとQA、model起動、認証隔離、artifactとcleanupを導入先へ適合させる独立作業にし、その境界の回帰試験が完了するまで本番起動しません。
 
