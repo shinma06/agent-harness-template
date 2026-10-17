@@ -7,7 +7,7 @@ GitHubのTemplate機能はファイルを複製する入口です。GitHub設定
 1. 公開範囲を決めてrepositoryを作成し、正規の `gh auth login` で必要なアカウントへログイン。
 2. cloneし `gh repo view --json nameWithOwner,visibility,defaultBranchRef` で接続先を確認。
 3. 小さいIssueを作成してclaimし、専用branch/worktreeからDraft PRを作成。
-4. CIの `harness-checks` を実行して成功を確認。内容はテンプレート自身のチェックです。
+4. CIの `harness-checks` を実行して成功を確認。内容は候補自身の回帰検証で、検査改変に耐える承認gateではありません（[信頼境界](ci.md#既存の入口と信頼境界)）。
 5. required checksとして登録する前に、同名jobの実行実績と導入先アプリの必要な検証jobを確認。
 6. 設定後はrulesetとbranchへの実適用を読み戻す。API失敗やプラン制限は未適用と記録。
 
@@ -27,7 +27,7 @@ OWNER/REPOSITORY/PR_NUMBERは導入先の値です。元のruleset ID、Project�
 
 ## CIの信頼境界
 
-[CIの品質と効率](ci.md)を正本に、read-only検証、成果物同一性、trusted判定、全量/選択検査と変更時の測定・証拠再利用・独立レビュー・復旧を確認します。元環境の製品配置/buildに結合したclassifierはコピーしません。
+[CIの品質と効率](ci.md)を正本に、read-only検証、成果物同一性、自動判定を追加する場合のtrusted code、全量/選択検査と変更時の測定・証拠再利用・独立レビュー・復旧を確認します。元環境の製品配置/buildに結合したclassifierはコピーしません。
 
 ## Issue / Project / Milestone
 

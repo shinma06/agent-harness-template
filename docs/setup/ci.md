@@ -6,9 +6,11 @@ CIのworkflow・起動/選択・runner/cache、CIが使う依存・toolchain・b
 
 同梱[workflow](../../.github/workflows/check.yml)と[pre-push](../../.githooks/pre-push)は同じ `python3 scripts/check.py` を実行します。この小さいテンプレートは全harnessチェックを毎回実行し、アプリ検査は[project.md](../project.md)で別に定義します。push・pull_request・workflow_dispatchの起動を維持しています。
 
+`harness-checks` は候補内のchecker/testsによる回帰検証です。PR時は既定checkoutによりmerge treeを検査します（[GitHub公式](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#how-the-merge-branch-affects-your-workflow)）。required化はこのjobの結果を必須にしますが、候補による検査の弱体化を拒否するtrustedな承認・受入gateにはなりません。workflow/checker/testsの変更も固定HEAD/baseの独立レビューで検証義務が保たれるか評価し、CI成功だけで統合しません。同梱CIに自動のPR policy / Agent review / Acceptance gateはありません。
+
 workflowはcontents:readで、checkoutのcredential保持を無効にしています。PRコードのテスト環境へwrite tokenや本番secretを渡しません。Actionsの版は導入時の方針に従って固定・更新し、起動を確認します。
 
-配布を追加する場合はtest/buildとpublishを分け、実際にbuildしたSHA/hashを保存します。branchが進んだだけで旧artifactを新SHAとして扱いません。PRの任意コードをtrustedなmerge/publish判定として実行せず、判断側を既定branchの確認済みrevisionに置きます。
+配布を追加する場合はtest/buildとpublishを分け、実際にbuildしたSHA/hashを保存します。branchが進んだだけで旧artifactを新SHAとして扱いません。自動merge/publish判定を追加する導入先では、PRの任意コードをtrustedな判定として実行せず、判断側を既定branchの確認済みrevisionに分離して検証します。
 
 導入先で重い検証を選択実行する場合は、rename/delete/mode変更、混在、unknown、不完全履歴を含めて検証し、hook/CI/coordinatorに判定を重複実装しません。選択不能は全量実行へ戻し、必要な全量実行も不能なら未達です。必須検査の失敗・中断・時間切れ・欠落、正当に空と確認できない0件を成功に変えません。キャッシュは再計算可能な補助データとし、成果物の同一性・生成元と別に確認します。
 
