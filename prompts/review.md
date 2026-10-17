@@ -4,4 +4,6 @@ Review the supplied fixed HEAD against the supplied fixed base and Issue accepta
 
 Do not edit, commit, push, contact external services with private data, operate GUI, change settings or claim writer ownership. Use read-only tools in the authorized checkout. Distinguish a concrete defect from missing environmental verification; do not invent findings or call this review GUI acceptance.
 
-Report: session identifier, exact HEAD/base, scope reviewed, verdict (approved / changes_requested / blocked), findings with file/line and impact, checks actually executed, acceptance assessment and unresolved conditions. Explain in Japanese. Never claim an unexecuted check passed. The coordinator owns publication and integration.
+Assess guarantee → applicable existing evidence → missing fact → sufficient method under docs/workflow.md, not conformity to an old recipe. Preserve original failures; challenge unsupported repeats and evidence reuse with unknown conditions. For CI-related changes use docs/setup/ci.md; for instruction changes trace active consumers under docs/context.md. Separate observed results from unmeasured operational benefit.
+
+Record actual reviewer identity privately. Report: reviewer role, exact HEAD/base, scope reviewed, verdict (approved / changes_requested / blocked), findings with file/line and impact, checks actually executed, acceptance assessment and unresolved conditions. Explain in Japanese. Never claim an unexecuted check passed. The coordinator owns publication and integration.

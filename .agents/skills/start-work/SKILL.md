@@ -11,4 +11,6 @@ Inspect the Issue/comments, related PRs, ownership, dependencies, branch, worktr
 
 Fetch without disturbing edits. Branch from the configured integration branch into `agent|codex|claude|cursor/<issue>-<slug>` in a dedicated worktree. Remove an inherited upstream to the integration branch. Install hooks with `python3 scripts/bootstrap.py` after inspecting them; preserve custom hooks on conflict.
 
-Record observable acceptance, real project checks and remaining GUI/release conditions in the Issue. Create a Draft PR on the first meaningful push. Continue through finish-work; setup or a Draft PR alone is not completion. Referencing agents, server settings or GUI capabilities does not authorize their use.
+Record observable acceptance, real project checks and remaining GUI/release conditions in the Issue. Use docs/workflow.md to connect each required guarantee to applicable existing evidence, the missing fact and the minimum sufficient method before assigning execution. For changes affecting CI execution, inputs or environment, use docs/setup/ci.md to record measurement, evidence reuse or justified omission in that same Issue.
+
+Create a Draft PR on the first meaningful push. Continue through finish-work; setup or a Draft PR alone is not completion. Referencing agents, server settings or GUI capabilities does not authorize their use.

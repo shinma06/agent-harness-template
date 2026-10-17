@@ -27,11 +27,7 @@ OWNER/REPOSITORY/PR_NUMBERは導入先の値です。元のruleset ID、Project�
 
 ## CIの信頼境界
 
-同梱workflowはcontents:readで、checkoutのcredential保持を無効にしています。PRコードのテスト環境へwrite tokenや本番secretを渡しません。Actionsの版は導入時の方針に従って固定・更新し、起動を確認します。
-
-成果物配布を追加する場合は、テスト/buildとpublishを分け、実際にbuildしたSHA/hashを保存します。branchが進んだだけで旧artifactを新SHAとして扱いません。PRの任意コードをtrustedなmerge/publish判定として実行せず、判断側を既定branchの確認済みrevisionに置きます。
-
-元環境のchange-impact classifierは製品配置とビルドに結合しているためコピーしません。この小さいテンプレートは全harnessチェックを毎回実行します。導入先で重い検証を選択実行する場合は、rename/delete/mode変更、混在、unknown、不完全履歴を含めて検証し、hook/CI/coordinatorに判定を重複実装しません。
+[CIの品質と効率](ci.md)を正本に、read-only検証、成果物同一性、trusted判定、全量/選択検査と変更時の測定・証拠再利用・独立レビュー・復旧を確認します。元環境の製品配置/buildに結合したclassifierはコピーしません。
 
 ## Issue / Project / Milestone
 
