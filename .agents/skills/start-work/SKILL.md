@@ -7,6 +7,8 @@ description: Begin or resume an Issue-scoped implementation, documentation or co
 
 Read AGENTS.md, docs/project.md and docs/workflow.md from the repository root. Reuse unchanged context. For instructions/Skills also read docs/context.md.
 
+Apply the operations profile in docs/workflow.md before choosing a new method or assignment. Send conflicts to PM for prior Omil consultation; continue agreed work within its bounds. For GUI tasks check the required route, target, result and shared effects under docs/operations.md before reserving or operating.
+
 Inspect the Issue/comments, related PRs, ownership, dependencies, branch, worktrees and dirty state. Search before creating an Issue. Claim scope, owner, base, target, reviewer, GUI need and next action, then read back. Unreleased claims do not expire. Resume in your existing worktree; take over only after reassignment and old-writer stop, in a separate worktree.
 
 Fetch without disturbing edits. Branch from the configured integration branch into `agent|codex|claude|cursor/<issue>-<slug>` in a dedicated worktree. Remove an inherited upstream to the integration branch. Install hooks with `python3 scripts/bootstrap.py` after inspecting them; preserve custom hooks on conflict.

@@ -1,5 +1,18 @@
 # 開発と終了の手順
 
+## 運用判断と事前相談
+
+運用は [pstack 0.15.36 の固定版](https://github.com/cursor/plugins/tree/bb68f2365eceafa0cb2d253112f675acf5f144cc/pstack)（`bb68f2365eceafa0cb2d253112f675acf5f144cc`）を参照し、コードの実装・修正・レビューには Ponytail full を使います。pstack は plugin 未登録でも[固定版の入口](https://github.com/cursor/plugins/blob/bb68f2365eceafa0cb2d253112f675acf5f144cc/pstack/skills/poteto-mode/SKILL.md)と該当手順を直接読めます。次の判断を既存 Issue/PR に適用します。
+
+- [Orchestrate](https://github.com/cursor/plugins/blob/bb68f2365eceafa0cb2d253112f675acf5f144cc/pstack/skills/poteto-mode/playbooks/orchestrate.md) に従い、成果・範囲・担当を定め、依存する工程へ進む前に結果を確認します。writer は一人、固定版のレビューは別セッションです。
+- 不具合は[固定版の Bug fix 手順](https://github.com/cursor/plugins/blob/bb68f2365eceafa0cb2d253112f675acf5f144cc/pstack/skills/poteto-mode/playbooks/bug-fix.md)を参照し、再現条件を保存し、原因を絞って最小限を修正し、元の条件で確認します。
+- [Prove It Works](https://github.com/cursor/plugins/blob/bb68f2365eceafa0cb2d253112f675acf5f144cc/pstack/skills/principle-prove-it-works/SKILL.md) に従い、受入に対応する実差分・成果物・観測結果を確認します。コマンドの受理や CI の成功だけで GUI・製品の受入を完了にしません。
+- 原典のモデル指定、子 agent 起動、watcher、force push 等を移植する権限は生まれません。導入先の実行権限、branch 保護、独立レビュー、予算・受入条件を優先します。
+
+**PM は、新しい運用判断を決める前に Omil に相談します。** Omil は方法や運用リスクを点検する担当です。新たな方針・検証方法・分担・順序・共有資源・停止/再開・統合手順の選択が対象です。worker は矛盾や不足を PM に返します。PM は実際に許可された経路で相談し、助言を踏まえた採否、理由、影響、次の担当を既存 Issue または計画に記録します。決定と結果回収は PM の責任です。
+
+合意済みの編集・検証、必要な空き予約の取得、定義済み条件内の GUI 経路切替はそのまま進めます。危険・実拒否・本人停止では該当範囲を直ちに止めて保全します。相談先が未設定・不在・未応答なら新判断だけを保留し、既に合意済みの独立作業は許可範囲で続けます。担当や回答を仮定したり、相談のために自動で別セッションや監視を起動したりしません。導入先は開始時に実際の担当と連絡経路を確認し、個人の宛先・識別子は公開しません。
+
 ## 開始
 
 1. Issueとコメント、関連PR、実際の依存、既存claim、branch/worktree/dirtyを確認。

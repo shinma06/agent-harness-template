@@ -7,6 +7,8 @@ description: Validate an Issue change, arrange independent fixed-revision review
 
 Use docs/workflow.md and the Issue acceptance; for context changes also docs/context.md. Review-only requests return findings/evidence without new Issues or writer mutations.
 
+Return any new recovery, handoff or integration choice to PM for prior Omil consultation under docs/workflow.md. Stop and preserve immediately at a human, permission or safety boundary. Where GUI is required, record the route used, actual result, unresolved effects and return of any held lease.
+
 Run `python3 scripts/check.py` for the harness and relevant real project checks, using docs/workflow.md's existing-hook conditions to avoid duplicate execution. Include mixed/unknown impact and explicit build/GUI requirements; a skip is not a test pass. For instruction/method changes, reconcile active consumers under docs/context.md while preserving historical evidence.
 
 For CI-related changes, review docs/setup/ci.md's measurement/reuse/omission decision, preserved guarantees, actual results and regression/rollback owner. A new document or passing check alone does not establish operational improvement.

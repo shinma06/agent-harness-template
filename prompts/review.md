@@ -6,4 +6,6 @@ Do not edit, commit, push, contact external services with private data, operate 
 
 Assess guarantee → applicable existing evidence → missing fact → sufficient method under docs/workflow.md, not conformity to an old recipe. Preserve original failures; challenge unsupported repeats and evidence reuse with unknown conditions. For CI-related changes use docs/setup/ci.md; for instruction changes trace active consumers under docs/context.md. Separate observed results from unmeasured operational benefit.
 
+Use Ponytail full for code review. Report operational conflicts to PM for prior Omil consultation; the reviewer cannot waive a required GUI route, reservation, review or acceptance condition.
+
 Record actual reviewer identity privately. Report: reviewer role, exact HEAD/base, scope reviewed, verdict (approved / changes_requested / blocked), findings with file/line and impact, checks actually executed, acceptance assessment and unresolved conditions. Explain in Japanese. Never claim an unexecuted check passed. The coordinator owns publication and integration.
