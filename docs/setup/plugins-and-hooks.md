@@ -6,9 +6,9 @@ Skillsは手順、PluginsはSkills/MCP/hooksなどの配布単位、hooksはイ�
 
 元環境ではPonytail、Warp連携、Codex app tools、Computer Use/browser、文書系、visualize等が設定されていました。文書系やSwift LSPを通常の開発必須にはしません。個人のharness-improve / instruction-audit / tune-agent-instructionsも発見されましたが、内容の全配布はせず、共通の監査原則をcontext.mdと棚卸しへ取り込みました。
 
-## Ponytail（任意）
+## Ponytail full（plugin の導入は任意）
 
-AGENTS.mdに最小実装の判断順序を持つので、plugin未導入でも共通方針は適用できます。pluginが必要なら[公式配布元](https://github.com/DietrichGebert/ponytail)の現在のinstall手順を使い、選んだref、実際のversion、manifest、hookスクリプトを確認します。
+[運用プロファイル](../workflow.md#運用判断と事前相談)では実装・コードレビューに full を使います。AGENTS.md に最小実装の判断順序を持つので、plugin 未導入でも共通方針は適用できます。plugin が必要なら[公式配布元](https://github.com/DietrichGebert/ponytail)の install 手順を使い、選んだ ref、実際の version、manifest、hook スクリプトを確認します。
 
 元環境の調査時は4.10.0のcacheと、SessionStart / UserPromptSubmit / SubagentStartのhook定義を確認しました。過去資料の4.9.0・trust未設定という記録を現行状態としてコピーしていません。hookにSubagentStartがあることは子agent起動の許可ではありません。
 

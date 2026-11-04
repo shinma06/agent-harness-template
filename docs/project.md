@@ -8,6 +8,7 @@
 | 対象外 | アプリ固有実装、アカウント移行、自動課金、既存環境の置換 |
 | 言語・runtime | Python 3.11以上（標準ライブラリ）、Bash、macOS/Linux |
 | 統合先 | main。developは作成・利用していない |
+| 運用 | [固定版 pstack と PM／Omil の事前相談](workflow.md#運用判断と事前相談)。実装・コードレビューは Ponytail full |
 | 検証 | `python3 scripts/check.py` |
 | build / package | なし。導入先で実buildコマンドを設定する |
 | GUI | テンプレート検証には不要。導入先の必要Caseで個別指定 |

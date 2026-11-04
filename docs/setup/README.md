@@ -9,7 +9,7 @@
 | 3 | [MCPと認証](mcp.md) | server一覧、必要なread-only呼出し、権限範囲 |
 | 4 | [Plugins・通知](plugins-and-hooks.md) | manifest/実行内容、重複、実イベントの確認 |
 | 5 | [GitHub](github.md)、[CI変更時の判断](ci.md) | repository、CI、保護ルール、Issue/PR経路 |
-| 6 | [GUI・リモート環境](gui-and-remote.md) | 必要な場合だけ、画面取得・対象識別・共通lease |
+| 6 | [GUI・リモート環境](gui-and-remote.md) | agent-desktop による観察・入力、対象と結果の識別、競合区間の予約 |
 | 7 | [自動進行](automation.md) | 単発のdry-run、その後明示起動・停止・復旧 |
 
 ## runtimeと配置

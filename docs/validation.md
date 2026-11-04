@@ -20,7 +20,7 @@ doctorは実行ファイルと入口の有無・選択hooksだけを表示し、
 | Git | Issue branch、hooks、禁止pushが拒否される使い捨て試験 |
 | MCP | server名、read-only呼出し、認証/権限の結果（秘密は省く） |
 | plugin/hook | 採用版、本人のtrust、実イベントの確認 |
-| GUI | 担当、lease、fixture、識別build、期待/実際、観察者 |
+| GUI | 担当、実経路と切替理由、共有影響と予約要否、fixture、識別build、期待/実際、観察者 |
 | CI/review | PR、固定HEAD/base、checks、独立session、指摘処置 |
 | scheduler | 単発実run、予算、停止、復旧、PAUSED維持 |
 
